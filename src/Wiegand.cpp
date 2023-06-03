@@ -201,7 +201,11 @@ void Wiegand::flushData() {
                     func_data_error(DataError::VerificationFailed, data, bits, func_data_error_param);
                 }
             }
-
+        } else if (bits == 35) {
+            if (func_data) {
+                bits = align_data(data, 0, bits);
+                func_data(data, bits, func_data_param);
+            }
         } else {
             if (func_data_error) {
                 bits = align_data(data, 0, bits);
